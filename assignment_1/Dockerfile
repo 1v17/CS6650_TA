@@ -1,11 +1,11 @@
 # Use official OpenJDK runtime as base image
-FROM openjdk:11-jre-slim
+FROM openjdk:22-jdk-slim
 
 # Set working directory
 WORKDIR /app
 
 # Copy the JAR file
-COPY target/*.jar app.jar
+COPY build/libs/*.jar app.jar
 
 # Expose port 8080
 EXPOSE 8080
