@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/echo")
-public class EchoController {
+public class EchoServiceController {
     
     @PostMapping
     public String echo(@RequestBody String message) {
