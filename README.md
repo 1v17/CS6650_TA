@@ -1,6 +1,6 @@
 # CS6650_TA
 
-## Assignment 1
+## Assignment 1 (Geoff's)
 ### Local Test
 Build Docker image:
 
@@ -19,4 +19,6 @@ Install AWS Tool ECR model on Windows:
     ```sh
     Install-Module -Name AWS.Tools.ECR -Force
     ```
-2. 
+2. Failed to uplaod the actually Dockerfile
+   
+## Assignment 2b - Terraform
