@@ -1,6 +1,7 @@
 # Simple Echo Service Test Script
 param(
     [string]$BaseUrl = "http://localhost:8080/echo",
+    # [string]$BaseUrl = "http://localhost:8080/echo", # for local test
     [string]$Message = "Hello World!"
 )
 
