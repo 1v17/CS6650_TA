@@ -32,5 +32,6 @@ No problem, though additional files should be added to .gitignore.
 
 ## Assignment 2b - Dockerfile with GO
 
-1. During docker build stage, the go.mod go version should be written as 1.23 (the major and minor version numbers).
-2. The base image specified in Dockerfile must match the go.mod version of go.
+1. Remember to update aws credentials with each session info.
+2. During docker build stage, the go.mod go version should be written as 1.23 (the major and minor version numbers).
+3. The base image specified in Dockerfile must match the go.mod version of go.

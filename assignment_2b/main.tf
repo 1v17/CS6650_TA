@@ -54,12 +54,12 @@ resource "aws_instance" "demo-instance" {
     git clone ${var.github_repo_url} app
     cd app/assignment_2b
     
-    # Build and run Docker container
-    docker build --tag gin_server .
-    docker run gin_server
-    
-    # Change ownership to ec2-user
+     # Change ownership to ec2-user
     chown -R ec2-user:ec2-user /home/ec2-user/app
+
+    # Build and run Docker container as ec2-user
+    sudo -u ec2-user docker build --tag gin_server . > /home/ec2-user/docker_build.log 2>&1
+    sudo -u ec2-user docker run -d --name gin_server -p 8080:8080 gin_server
   EOF
 
   tags = {

@@ -32,3 +32,9 @@ replay_pid*
 *.tfplan.*
 # Terraform variables file
 *.tfvars
+
+# Python environment
+venv/
+
+# Python environment variables
+.env
