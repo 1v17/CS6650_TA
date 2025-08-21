@@ -1,6 +1,6 @@
 # CS6650_TA
 
-## Assignment 1 (Geoff's)
+## Assignment 1
 ### Local Test
 Build Docker image:
 
@@ -20,5 +20,10 @@ Install AWS Tool ECR model on Windows:
     Install-Module -Name AWS.Tools.ECR -Force
     ```
 2. Failed to uplaod the actually Dockerfile
-   
+
+## Assignment 1b - AWS EC2
+Note: 
+1. On Windows, the ssh key must be specified as `C:\Users\UserName\.ssh\key_name.pem` in the ssh login command.
+2. Change security groups inbound rules.
+
 ## Assignment 2b - Terraform

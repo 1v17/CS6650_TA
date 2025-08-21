@@ -23,5 +23,12 @@
 hs_err_pid*
 replay_pid*
 
+# Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfplan.*
 # Terraform variables file
 *.tfvars

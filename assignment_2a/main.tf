@@ -1,38 +1,18 @@
-# Important AWS credentials
-# DO NOT COMMIT THEM TO PUBLIC SPACE (e.g. GIT)
-variable "aws_access_key_id" {
-  type      = string
-  sensitive = true
-}
-
-variable "aws_secret_access_key" {
-  type      = string
-  sensitive = true
-}
-
-variable "aws_session_token" {
-  type      = string
-  sensitive = true
-}
-
 # You probably want to keep your ip address a secret as well
 variable "ssh_cidr" {
   type        = string
   description = "Your home IP in CIDR notation"
 }
 
-# name of the ssh key you will be generating
+# name of the existing AWS key pair
 variable "ssh_key_name" {
   type        = string
-  description = "Name of your ssh key"
+  description = "Name of your existing AWS key pair"
 }
 
 # The provider of your cloud service, in this case it is AWS. 
 provider "aws" {
   region     = "us-west-2" # Which region you are working on
-  access_key = var.aws_access_key_id
-  secret_key = var.aws_secret_access_key
-  token      = var.aws_session_token
 }
 
 # Your ec2 instance
@@ -41,7 +21,7 @@ resource "aws_instance" "demo-instance" {
   instance_type          = "t2.micro"
   iam_instance_profile   = "LabInstanceProfile"
   vpc_security_group_ids = [aws_security_group.ssh.id]
-  key_name               = aws_key_pair.test-key.key_name
+  key_name               = var.ssh_key_name
 
   tags = {
     Name = "terraform-created-instance-:)"
@@ -76,11 +56,6 @@ data "aws_ami" "al2023" {
     name   = "name"
     values = ["al2023-ami-*-x86_64-ebs"]
   }
-}
-
-resource "aws_key_pair" "test-key" {
-  key_name   = "test-key"
-  public_key = file("./${var.ssh_key_name}.pub")
 }
 
 output "ec2_public_dns" {
