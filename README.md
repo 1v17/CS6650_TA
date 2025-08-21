@@ -26,4 +26,11 @@ Note:
 1. On Windows, the ssh key must be specified as `C:\Users\UserName\.ssh\key_name.pem` in the ssh login command.
 2. Change security groups inbound rules.
 
-## Assignment 2b - Terraform
+## Assignment 2a - Terraform
+
+No problem, though additional files should be added to .gitignore.
+
+## Assignment 2b - Dockerfile with GO
+
+1. During docker build stage, the go.mod go version should be written as 1.23 (the major and minor version numbers).
+2. The base image specified in Dockerfile must match the go.mod version of go.
