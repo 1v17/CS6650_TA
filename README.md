@@ -51,4 +51,9 @@ No problem, though additional files should be added to .gitignore.
     ```
 
 ## Assignment 3b & 3c - Terraform for ECR/ECS
+
 See the other [repo](https://github.com/1v17/CS6650_2b_demo).
+
+## Assignmnet 4a
+
+1. Data race will more likely to appear when run with `-race` flag. This flag will make race detector add extra checks to every memory access to detect data races.
