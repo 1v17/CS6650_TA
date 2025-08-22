@@ -49,3 +49,6 @@ No problem, though additional files should be added to .gitignore.
     ```pwsh
     docker tag gin_server:latest ${ECR_URL}:latest
     ```
+
+## Assignment 3b & 3c - Terraform for ECR/ECS
+See the other [repo](https://github.com/1v17/CS6650_2b_demo).
