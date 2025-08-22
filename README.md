@@ -57,3 +57,13 @@ See the other [repo](https://github.com/1v17/CS6650_2b_demo).
 ## Assignmnet 4a
 
 1. Data race will more likely to appear when run with `-race` flag. This flag will make race detector add extra checks to every memory access to detect data races.
+2. Results of collection experiment:
+    ```
+    Mutex map test:
+    len(m) = 50000, time = 8.8637ms
+    RWMutex map test:
+    len(m) = 50000, time = 12.5759ms
+    sync.Map test:
+    len(m) = 50000, time = 28.8603ms
+    ```
+3. In write-heavy sccenario, the `sync.Map` might be the most inefficient one. This struct is optimized for write-once, read-many operations and disjoint key access for multiple goroutines.

@@ -6,7 +6,7 @@ import (
 	// "sync/atomic"
 )
 
-func main() {
+func AtomicMain() {
 
 	// var ops atomic.Uint64
 	var ops int64
