@@ -3,5 +3,6 @@ package main
 func main() {
 	// AtomicMain()
 	// Collection()
-	FileMain()
+	// FileMain()
+	SwitchingMain()
 }

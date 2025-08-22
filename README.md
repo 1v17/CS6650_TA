@@ -78,3 +78,11 @@ Data race will more likely to appear when run with `-race` flag. This flag will 
     Buffered write:   10.9805m
     ```
 2. Buffered file writing is much faster because it reduces the number of system calls made to the operating system, while every `f.Write` sends data directly to the OS, causing a system call for every line (100,000 times). System calls are slow and expensive.
+
+### Context Switching
+1. Result of context switching for goroutines:
+    ```
+    GOMAXPROCS=1: total=381.0931ms, avg switch=190ns
+    GOMAXPROCS=8: total=506.1486ms, avg switch=253ns
+    ```
+2. When `GOMAXPROCS=1`, Go runs all goroutines on a single OS thread. Context switching between goroutines is handled entirely in user space by the Go scheduler, which is very fast because it doesn't involve the operating system. When `GOMAXPROCS=8` (or any value >1), Go can run goroutines on multiple OS threads. It is slower because the OS must manage thread scheduling and there may be additional overhead for synchronizing memory between threads (cache coherence, etc.).
