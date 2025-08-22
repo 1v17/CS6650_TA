@@ -7,8 +7,8 @@ import (
 )
 
 const (
-	goroutines = 50
-	iterations = 1000
+	goroutines    = 50
+	mapIterations = 1000
 )
 
 func plainMapTest() {
@@ -20,8 +20,8 @@ func plainMapTest() {
 		wg.Add(1)
 		go func(g int) {
 			defer wg.Done()
-			for i := 0; i < iterations; i++ {
-				m[g*iterations+i] = i // Not safe!
+			for i := 0; i < mapIterations; i++ {
+				m[g*mapIterations+i] = i // Not safe!
 			}
 		}(g)
 	}
@@ -45,9 +45,9 @@ func mutexMapTest() {
 		wg.Add(1)
 		go func(g int) {
 			defer wg.Done()
-			for i := 0; i < iterations; i++ {
+			for i := 0; i < mapIterations; i++ {
 				mm.mu.Lock()
-				mm.m[g*iterations+i] = i
+				mm.m[g*mapIterations+i] = i
 				mm.mu.Unlock()
 			}
 		}(g)
@@ -71,9 +71,9 @@ func rwMutexMapTest() {
 		wg.Add(1)
 		go func(g int) {
 			defer wg.Done()
-			for i := 0; i < iterations; i++ {
+			for i := 0; i < mapIterations; i++ {
 				rm.mu.Lock()
-				rm.m[g*iterations+i] = i
+				rm.m[g*mapIterations+i] = i
 				rm.mu.Unlock()
 			}
 		}(g)
@@ -92,8 +92,8 @@ func syncMapTest() {
 		wg.Add(1)
 		go func(g int) {
 			defer wg.Done()
-			for i := 0; i < iterations; i++ {
-				m.Store(g*iterations+i, i)
+			for i := 0; i < mapIterations; i++ {
+				m.Store(g*mapIterations+i, i)
 			}
 		}(g)
 	}

@@ -56,8 +56,11 @@ See the other [repo](https://github.com/1v17/CS6650_2b_demo).
 
 ## Assignmnet 4a
 
-1. Data race will more likely to appear when run with `-race` flag. This flag will make race detector add extra checks to every memory access to detect data races.
-2. Results of collection experiment:
+### Atomicity
+Data race will more likely to appear when run with `-race` flag. This flag will make race detector add extra checks to every memory access to detect data races.
+
+### Collections
+1. Results of collection experiment:
     ```
     Mutex map test:
     len(m) = 50000, time = 8.8637ms
@@ -66,4 +69,12 @@ See the other [repo](https://github.com/1v17/CS6650_2b_demo).
     sync.Map test:
     len(m) = 50000, time = 28.8603ms
     ```
-3. In write-heavy sccenario, the `sync.Map` might be the most inefficient one. This struct is optimized for write-once, read-many operations and disjoint key access for multiple goroutines.
+2. In write-heavy sccenario, the `sync.Map` might be the most inefficient one. This struct is optimized for write-once, read-many operations and disjoint key access for multiple goroutines.
+
+### File Access
+1. Results of two file writing functions:
+    ```
+    Unbuffered write: 713.3351ms
+    Buffered write:   10.9805m
+    ```
+2. Buffered file writing is much faster because it reduces the number of system calls made to the operating system, while every `f.Write` sends data directly to the OS, causing a system call for every line (100,000 times). System calls are slow and expensive.

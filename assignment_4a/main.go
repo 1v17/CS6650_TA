@@ -2,5 +2,6 @@ package main
 
 func main() {
 	// AtomicMain()
-	Collection()
+	// Collection()
+	FileMain()
 }
