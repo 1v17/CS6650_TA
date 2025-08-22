@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strconv"
 	"sync"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -31,7 +32,19 @@ func main() {
 	router.GET("/products/:productId", getProductByID)
 	router.POST("/products", postProduct)
 
+	// Health check endpoint
+	router.GET("/health", healthHandler)
+
 	router.Run(":8080")
+}
+
+// healthHandler handles GET /health
+func healthHandler(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"status":    "healthy",
+		"timestamp": time.Now().Unix(),
+		"service":   "product-service",
+	})
 }
 
 // getProductByID handles GET /products/:productId
