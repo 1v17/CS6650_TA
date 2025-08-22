@@ -14,8 +14,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
     go build -ldflags="-s -w" -o server .
 
 # Deploy the application binary into a lean image
-FROM alpine:latest
-RUN apk add --no-cache ca-certificates
+FROM gcr.io/distroless/base-debian11 AS build-release-stage
 
 WORKDIR /app
 COPY --from=build /src/server .
