@@ -25,7 +25,6 @@ replay_pid*
 
 # Terraform
 .terraform/
-.terraform.lock.hcl
 *.tfstate
 *.tfstate.*
 *.tfplan
