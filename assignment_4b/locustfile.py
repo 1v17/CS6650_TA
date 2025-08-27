@@ -1,4 +1,4 @@
-from locust import HttpUser, task, between, events
+from locust import FastHttpUser, task, between, events
 import random
 import json
 import logging
@@ -12,12 +12,16 @@ class Metrics:
     def __init__(self):
         self.get_count = 0
         self.post_count = 0
+        self.users_spawned = 0
     
     def add_get(self):
         self.get_count += 1
     
     def add_post(self):
         self.post_count += 1
+    
+    def add_user(self):
+        self.users_spawned += 1
     
     def get_ratio(self):
         if self.post_count == 0:
@@ -38,13 +42,18 @@ def generate_product():
         "some_other_id": random.randint(1, 10000)
     }
 
-# Locust User class
-class ProductAPIUser(HttpUser):
+# Locust User class - FastHttpUser for better performance
+class ProductAPIUser(FastHttpUser):
     wait_time = between(1, 3)  # Wait between 1-3 seconds between tasks
+    connection_timeout = 10.0
+    network_timeout = 10.0
     
     def on_start(self):
-        """Setup when the user starts"""
+        """Setup when each user starts"""
         logger.info("User started")
+        metrics.add_user()
+        logger.info(f"Users spawned so far: {metrics.users_spawned}")
+        
         # We already know a product with ID 12345 exists
         self.known_product_id = 12345
         self.created_products = []
@@ -78,7 +87,7 @@ class ProductAPIUser(HttpUser):
     def create_product(self):
         """Task to POST a product - 1/3 as frequent as GET"""
         product = generate_product()
-        
+            
         with self.client.post("/products", json=product, catch_response=True) as response:
             if response.status_code == 201:
                 # Store the created product ID for future GET requests
@@ -91,11 +100,20 @@ class ProductAPIUser(HttpUser):
         
         metrics.add_post()
 
+# Event handlers with compatible signatures
 @events.test_start.add_listener
-def on_test_start():
+def on_test_start(*args, **kwargs):
     logger.info("Test is starting")
+    logger.info("Will simulate 50 users with 10 users/sec spawn rate")
+    logger.info("Target GET:POST ratio is 3:1")
+    
+    # Reset metrics at test start
+    metrics.get_count = 0
+    metrics.post_count = 0
+    metrics.users_spawned = 0
 
 @events.test_stop.add_listener
-def on_test_stop():
+def on_test_stop(*args, **kwargs):
     logger.info(f"Test finished. GET:POST ratio = {metrics.get_ratio()}")
     logger.info(f"GET requests: {metrics.get_count}, POST requests: {metrics.post_count}")
+    logger.info(f"Total users spawned: {metrics.users_spawned}")
