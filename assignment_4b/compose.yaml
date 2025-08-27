@@ -1,0 +1,25 @@
+
+version: '3'
+
+services:
+  master:
+    image: locustio/locust
+    ports:
+     - "8089:8089"
+    volumes:
+      - ./:/mnt/locust
+    command: -f /mnt/locust/locustfile.py --master -H ${API_HOST} --users 50 --spawn-rate 10 --run-time 5m
+    environment:
+      - API_HOST=${API_HOST}
+    env_file:
+      - .env
+
+  worker:
+    image: locustio/locust
+    volumes:
+      - ./:/mnt/locust
+    command: -f /mnt/locust/locustfile.py --worker --master-host master
+    environment:
+      - API_HOST=${API_HOST}
+    env_file:
+      - .env

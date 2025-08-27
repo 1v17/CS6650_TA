@@ -37,3 +37,8 @@ venv/
 
 # Python environment variables
 .env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
