@@ -86,3 +86,10 @@ Data race will more likely to appear when run with `-race` flag. This flag will 
     GOMAXPROCS=8: total=506.1486ms, avg switch=253ns
     ```
 2. When `GOMAXPROCS=1`, Go runs all goroutines on a single OS thread. Context switching between goroutines is handled entirely in user space by the Go scheduler, which is very fast because it doesn't involve the operating system. When `GOMAXPROCS=8` (or any value >1), Go can run goroutines on multiple OS threads. It is slower because the OS must manage thread scheduling and there may be additional overhead for synchronizing memory between threads (cache coherence, etc.).
+
+## Assignment 4b
+1. Post requests consistently take more time then Get requests. This pattern is expected since I use `sync.Map` to store the product data.
+2. After switching from `HttpUser` to `FastHttpUser`, the throughput became wavey. It might hit certain threshold in my laptop?
+
+## Assignment 5a
+
