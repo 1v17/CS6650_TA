@@ -92,4 +92,15 @@ Data race will more likely to appear when run with `-race` flag. This flag will 
 2. After switching from `HttpUser` to `FastHttpUser`, the throughput became wavey. It might hit certain threshold in my laptop?
 
 ## Assignment 5a
+Note: 
+1. The week number should be changed to week 6, otherwise the number will become more and more confusing.
+2. The students will probably use the product API implemented in assignment 4, which utilizes thread-safe map.
+
+### Part 3
+- Peak CPU utilization: ____%
+- Peak memory utilization: ____%
+- Average response time: ____ms
+- P95 response time: ____ms
+- Requests per second: ____
+- Error rate: ____%
 
