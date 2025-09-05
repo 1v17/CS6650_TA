@@ -113,8 +113,8 @@ Note:
 2. The students will probably use the product API implemented in assignment 4, which utilizes thread-safe map.
 3. Remind them to get rid of `wait_time` (if added in last assignment) first, otherwise request per second can be fairly low.
 4. The terraform template in [2b_demo](https://github.com/RuidiH/CS6650_2b_demo/tree/master/terraform) (actually in assignment 3b, the naming is really confusing) doesn't have a `.tfvars` file, perhaps we should provide them with an `example.tfvars` file?
-5. Part 3 has some formatting problem, there are three 1s.
-6. None of the resources hit 100% in part 3, which means my laptop was the bottleneck. For students, the bottleneck might be something else though, network speed for example.
+5. Part 3 has some formatting problems, there are three 1s.
+6. None of the resources hit 100% in part 3 initially, which means my laptop was the bottleneck. I had to borrow a Mac from campus to achieve the result. For students, the bottleneck might be something else though, network speed for example.
 
 ### Part 3
 
@@ -138,8 +138,8 @@ Note:
 
 #### On loaned laptop from campus
 
-- Peak CPU utilization: []%
-- Peak memory utilization: []%
+- Peak CPU utilization: 95.44%
+- Peak memory utilization: 15.24%
 - Average response time: 68ms
 - P95 response time: 110ms
 - Requests per second: 2769
@@ -167,7 +167,11 @@ Note:
 
 ### Part 5
 
-| Configuration | CPU  | Memory  | Relative Cost | Avg Response | RPS | Performance per $ |
-| ------------- | ---- | ------- | ------------- | ------------ | --- | ----------------- |
-| Baseline      | 256  | 512 MB  | $ (1x)        |              |     |                   |
-| Scaled        | 1024 | 2048 MB | $ (4x)        |              |     |                   |
+| Configuration | CPU  | Memory  | Relative Cost | Avg Response | RPS    | Performance per $ |
+| ------------- | ---- | ------- | ------------- | ------------ | ------ | ----------------- |
+| Baseline      | 256  | 512 MB  | $ (1x)        | 68           | 2769   | 2769              |
+| Scaled        | 1024 | 2048 MB | $ (4x)        | 31           | 5628.5 | 1407              |
+
+This is Amdahl's Law in Practice. The improved response time (68ms → 31ms, roughly 2.2x faster) with 4x resources demonstrates this perfectly. The sequential portions of your application limit the total speedup possible. There are other infrastructure limitations: network speed, load tester.
+
+Scale vertically when the server is identified as the bottleneck: CPU consistently >70-80% during normal operation, Memory usage >80-85% with frequent GC (Garbage Collector) pressure in Go, Response times increasing under normal load.
