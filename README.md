@@ -114,7 +114,7 @@ Note:
 3. Remind them to get rid of `wait_time` (if added in last assignment) first, otherwise request per second can be fairly low.
 4. The terraform template in [2b_demo](https://github.com/RuidiH/CS6650_2b_demo/tree/master/terraform) (actually in assignment 3b, the naming is really confusing) doesn't have a `.tfvars` file, perhaps we should provide them with an `example.tfvars` file?
 5. Part 3 has some formatting problem, there are three 1s.
-6. None of the resources hit 100% in part 3, am I the only one? The bottleneck might be something else though, network speed for example.
+6. None of the resources hit 100% in part 3, which means my laptop was the bottleneck. For students, the bottleneck might be something else though, network speed for example.
 
 ### Part 3
 
@@ -138,11 +138,20 @@ Note:
 
 ### Part 4
 
+#### On my own laptop
 - Peak CPU utilization: 26.58%
 - Peak memory utilization: 2.27%
 - Average response time: 32ms
 - P95 response time:62ms
 - Requests per second: 1855.8
+- Error rate: 0%
+
+#### On loaned laptop from campus
+- Peak CPU utilization: []%
+- Peak memory utilization: []%
+- Average response time: 31ms
+- P95 response time:57ms
+- Requests per second: 5628.5
 - Error rate: 0%
 
 ### Part 5
