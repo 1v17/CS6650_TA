@@ -138,11 +138,11 @@ Note:
 
 #### On loaned laptop from campus
 
-- Peak CPU utilization: 55.2%
-- Peak memory utilization: 11.98%
-- Average response time: 40ms
+- Peak CPU utilization: []%
+- Peak memory utilization: []%
+- Average response time: 68ms
 - P95 response time: 110ms
-- Requests per second: 2015.9
+- Requests per second: 2769
 - Error rate: 0%
 
 ### Part 4
