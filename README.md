@@ -167,11 +167,26 @@ Note:
 
 ### Part 5
 
-| Configuration | CPU  | Memory  | Relative Cost | Avg Response | RPS    | Performance per $ |
-| ------------- | ---- | ------- | ------------- | ------------ | ------ | ----------------- |
-| Baseline      | 256  | 512 MB  | $ (1x)        | 68           | 2769   | 2769              |
-| Scaled        | 1024 | 2048 MB | $ (4x)        | 31           | 5628.5 | 1407              |
+| Configuration | CPU  | Memory  | Relative Cost | Avg Response | Avg RPS | Performance per $ |
+| ------------- | ---- | ------- | ------------- | ------------ | ------- | ----------------- |
+| Baseline      | 256  | 512 MB  | $ (1x)        | 68           | 2769    | 2769              |
+| Scaled        | 1024 | 2048 MB | $ (4x)        | 31           | 5628.5  | 1407              |
 
 This is Amdahl's Law in Practice. The improved response time (68ms → 31ms, roughly 2.2x faster) with 4x resources demonstrates this perfectly. The sequential portions of your application limit the total speedup possible. There are other infrastructure limitations: network speed, load tester.
 
 Scale vertically when the server is identified as the bottleneck: CPU consistently >70-80% during normal operation, Memory usage >80-85% with frequent GC (Garbage Collector) pressure in Go, Response times increasing under normal load.
+
+## Assignment 5b
+
+Note:
+
+1. There is no starter code link, I used copilot to add ALB for me in terraform, spent about 1.5 hours debugging.
+2. Should we specify the CPU and memory config for ECS since students most likely have changed them in the previous assignment?
+
+| Configuration       | Instances | Avg RPS | Avg Response | Relative Cost |
+| ------------------- | --------- | ------- | ------------ | ------------- |
+| Vertical (5a)       | 1         | 2769    | 68           | $             |
+| Horizontal Baseline | 2         |         |              | $             |
+| Horizontal Scaled   | 4+        | 4833.7  | 59           |               |
+
+An extra task was created after I ran the locus test for 4 minutes, and another was created after 10 minutes of running.
