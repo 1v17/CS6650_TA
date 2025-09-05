@@ -44,7 +44,7 @@ def generate_product():
 
 # Locust User class - FastHttpUser for better performance
 class ProductAPIUser(FastHttpUser):
-    wait_time = between(1, 3)  # Wait between 1-3 seconds between tasks
+    # wait_time = between(1, 3)  # Wait between 1-3 seconds between tasks
     connection_timeout = 10.0
     network_timeout = 10.0
     
